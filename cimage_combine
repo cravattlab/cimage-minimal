@@ -5,6 +5,7 @@ if [ $# -lt 1 ]; then
     exit -1
 fi
 
+# grab all arguments that we expect
 by_protein=""
 if [ $1 == "by_protein" ]; then
     by_protein=$1
@@ -32,6 +33,7 @@ else
     listpath="mylist_none"
 fi
 
+# check if first nine chars match output_rt
 tmptxt=$(echo $1 | cut -c1-9)
 if [ $tmptxt == "output_rt" ]; then
     txt=$1
@@ -41,14 +43,24 @@ else
 fi
 allpt=""
 outname="combined"
+
+# look at rest of arguments
 for p in $@
 do
+    # if following instructions on website, outname will have a value of
+    # combined_dta, and loop will only go once
     outname=$outname\_$p
+    # find  within dta folder
+    # eg. dta/output/output_rt_10_sn_2.5.to_excel.txt
     pt=$(find $p -name $txt)
+    # given one input dta folder will allpt will be equal to pt
+    # otherwise will be a list of paths to multiple dta folders
     allpt="$allpt $pt"
 done
+# gets directory without output_rt_10_sn_2.5.to_excel.txt part
 dirs=$(echo $allpt | sed "s/$txt//g")
 
+# useless as far as I can tell
 nchar=$(echo $outname | wc -c)
 ##if [ "$nchar" -gt 20 ]; then
 ##    outname="combine_all"
