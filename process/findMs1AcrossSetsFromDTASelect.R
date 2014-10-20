@@ -1,7 +1,7 @@
 suppressPackageStartupMessages(library(xcms))
 cimage.path <- Sys.getenv("CIMAGE_PATH")
-source(paste(cimage.path,"/R/inputparams.R",sep=""))
-source(paste(cimage.path,"/R/msisotope.R",sep=""))
+source(paste(cimage.path,"/process/inputparams.R",sep=""))
+source(paste(cimage.path,"/process/msisotope.R",sep=""))
 
 ## file name from input args
 args <- commandArgs(trailingOnly=T)
