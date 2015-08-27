@@ -82,8 +82,8 @@ fi
 cwd=$(pwd)
 
 if [ "$by_protein" == "by_protein" ]; then
-    $CIMAGE_PATH/perl/textTableCombinedToHtml_by_protein.pl $outname $cwd $allpt
+    $CIMAGE_PATH/combine/textTableCombinedToHtml_by_protein.pl $outname $cwd $allpt
 else
-    $CIMAGE_PATH/perl/textTableCombinedToHtml.pl $outname $cwd $allpt
+    $CIMAGE_PATH/combine/textTableCombinedToHtml.pl $outname $cwd $allpt
 fi
 
