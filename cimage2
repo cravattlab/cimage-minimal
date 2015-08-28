@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 if [ $# -lt 1 ]; then
     echo Usage: $0 cimage.params [no_png] set_1 set_2 ...
@@ -47,7 +48,7 @@ do
 	    fi
 	fi
 	HL=$(echo $p2 | sed 's/\.txt$//g' | awk -F "_" '{print $NF}')
-	$CIMAGE_PATH/process/tagDTASelect.py $p2 > $p2.tagged;
+	python2 $CIMAGE_PATH/process/tagDTASelect.py $p2 > $p2.tagged;
 	cat $p2.tagged | grep ^cimagepep | grep $p1 | sed 's/^cimagepep\-//g' | sed 's/IPI://g' | sed 's/'sp\|'//g' | sed 's/'tr\|'//g' | awk '{print $1}' > $p2.tmp.ipi
 	cat $p2.tagged | grep ^cimagepep | grep $p1 | awk '{print $2}' > $p2.tmp.FileName
 	cat $p2.tagged | grep ^cimagepep | grep $p1 | awk -v HL=$HL '{print $3, HL}' > $p2.tmp.xcorr
@@ -56,7 +57,7 @@ do
 	for p3 in $(cat $p2.tmp.sequence | sort | uniq )
 	do
 	    echo -n "$p3 "
-	    $CIMAGE_PATH/process/peptideCalcMass.py $p3 mono;
+	    python2 $CIMAGE_PATH/process/peptideCalcMass.py $p3 mono;
 	done > $p2.tmp.uniq.mass
 	for p3 in $(cat $p2.tmp.sequence)
 	do

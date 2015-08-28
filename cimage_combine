@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ $# -lt 1 ]; then
     echo Usage: $0 [by_protein] [exclude_singleton] [descending]  text_file dir1 ...
     exit -1
