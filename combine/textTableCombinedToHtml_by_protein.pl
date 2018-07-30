@@ -39,7 +39,7 @@ table#sample TD {
     text-align: center;
 }
 </STYLE>
-<script data-main="/cimage-patches/main" src="/cimage-patches/vendor/require.js" type="text/javascript"></script>
+<script data-main="/~github/cimage-clientpatches/main" src="/~github/cimage-clientpatches/vendor/require.js" type="text/javascript"></script>
 </HEAD>
 <BODY>
 ENDOFHEADER
