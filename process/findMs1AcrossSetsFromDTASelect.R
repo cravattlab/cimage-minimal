@@ -206,13 +206,21 @@ for ( i in 1:dim(cross.table)[1] ) {
     }
     xlimit <-c(which(xfile@scantime>rt.min)[1]-1, which(xfile@scantime>rt.max)[1] )
     if (is.na(xlimit[2]) ) xlimit[2] <- length(xfile@scantime)
+    
+    ## Returns the Y scale for the graph.
     ylimit <- range(c(raw.ECI.light[[2]][xlimit[1]:xlimit[2]], raw.ECI.heavy[[2]][xlimit[1]:xlimit[2]]))
+    ## Set bottom of Y scale to 0
     ylimit[1] <- 0.0
+    
+    ## This appears to be a scaling factor, applied to the highest intensity found
+    ## within the retention time window. 
     ylimit[2] <- ylimit[2]*1.2
     local.xlimit <- xlimit <- c(rt.min,rt.max)/60
     raw.ECI.light.rt <- xfile@scantime[ raw.ECI.light[[1]] ] / 60
     raw.ECI.heavy.rt <- xfile@scantime[ raw.ECI.heavy[[1]] ] / 60
-
+    
+    ## Does NL actually need to be outputted? If so, the value should be divided by 1.2
+    ## since it still scaled here
     tt.main <- paste(tag, raw.file, "; Raw Scan:", as.character(raw.scan.num[j]),
                      "; NL:", formatC(ylimit[2], digits=2, format="e"))
     plot(raw.ECI.light.rt, raw.ECI.light[[2]], type="l", col="red",xlab="Retention Time(min)",
